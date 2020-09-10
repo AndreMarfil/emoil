@@ -3,6 +3,11 @@
   flex-direction: column;
   background-color: var(--color-primary);
 }
+
+.page-header .header-content {
+  margin-bottom: 6.4rem;
+}
+
 .page-header .top-bar-container {
   width: 90%;
   margin: 0 auto;

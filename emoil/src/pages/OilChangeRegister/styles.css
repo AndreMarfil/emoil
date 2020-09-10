@@ -1,10 +1,10 @@
-#page-registeroil-form {
+#page-registeroilchange-form {
   width: 100vw;
   height: 100vh;
 }
 
 @media (min-width: 700px) {
-  #page-registeroil-form {
+  #page-registeroilchange-form {
     max-width: 100vw;
   }
 }

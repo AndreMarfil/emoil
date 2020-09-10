@@ -4,6 +4,7 @@ import './styles.css';
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import FormContainer from '../../components/FormContainer';
+import Textarea from '../../components/Textarea';
 
 const OilRegister: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const OilRegister: React.FC = () => {
           <legend>Dados do óleo</legend>
           <Input type="text" name="name" label="Nome do óleo" />
           <Input type="number" name="expiration" label="Validade (Em meses)" />
+          <Textarea name="info" label="Informações adicionais" />
         </fieldset>
       </FormContainer>
     </div>

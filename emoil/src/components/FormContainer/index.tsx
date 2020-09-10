@@ -6,7 +6,7 @@ import './styles.css';
 
 const FormContainer: React.FC = ({ children }) => {
   return (
-    <main>
+    <main className="main-container">
       {children}
       <footer>
         <p>

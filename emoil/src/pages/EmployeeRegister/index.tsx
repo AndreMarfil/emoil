@@ -17,10 +17,6 @@ const EmployeeRegister: React.FC = () => {
           <legend>Dados do funcionário</legend>
           <Input type="text" name="name" label="Nome do funcionário" />
         </fieldset>
-        <fieldset>
-          <legend>Dados do a</legend>
-          <Input type="text" name="name" label="Nome do funcionário" />
-        </fieldset>
       </FormContainer>
     </div>
   );

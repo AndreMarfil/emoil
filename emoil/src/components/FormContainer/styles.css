@@ -73,3 +73,19 @@ main footer button {
 main footer button:hover {
   background: var(--color-secundary-dark);
 }
+
+@media (min-width: 700px) {
+   main footer {
+    padding: 4rem 6.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+   main footer p {
+    justify-content: space-between;
+  }
+   main footer button {
+    width: 20rem;
+    margin-top: 0;
+  }
+}
