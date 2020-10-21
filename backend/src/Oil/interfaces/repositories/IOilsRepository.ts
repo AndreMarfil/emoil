@@ -1,7 +1,4 @@
-import Oil from '../../models/Oil';
-
-import ICreateOilDTO from '../../dtos/ICreateOilDTO';
-
+import ICreateOilDTO from '../../dtos/lCreateOilDTO';
 import Oil from '../../entities/Oil';
 
 interface IOilsRepository {

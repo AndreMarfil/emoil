@@ -1,6 +1,8 @@
 import { injectable, inject } from 'tsyringe';
+import { addMonths } from 'date-fns';
 import * as Yup from 'yup';
-import IOilsRepository from '../repositories/IOilsRepository';
+import IOilsRepository from '../interfaces/repositories/IOilsRepository';
+import Oil from '../entities/Oil';
 
 interface IRequest {
   name: string;
@@ -15,17 +17,22 @@ class CreateOilService {
   ) {}
 
   public async execute({ name, expirationInMonth }: IRequest): Promise<Oil> {
-    // expirationMonth > 0
-    // name não pode ser vazio
-    // transformar o numero de meses em uma data futura
-    // inserir no BD
-
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
-      expirationInMonth: Yup.number().required(),
+      name: Yup.string().required(
+        'Aqui pode conter uma mensagem segundo o Leo',
+      ),
+      expirationInMonth: Yup.number()
+        .required()
+        .moreThan(0, 'A expiração do oléo deve ser maior que zero'),
     });
 
     await schema.validate({ name, expirationInMonth }, { abortEarly: false });
+
+    const expiration = addMonths(new Date(), expirationInMonth);
+
+    const oil = await this.oilsRepository.create({ expiration, name });
+
+    return oil;
   }
 }
 

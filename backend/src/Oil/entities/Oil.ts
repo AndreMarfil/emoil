@@ -14,7 +14,7 @@ class Oil {
   name: string;
 
   @Column()
-  expiration: Date;
+  expiration: number;
 
   @CreateDateColumn()
   created_at: Date;
