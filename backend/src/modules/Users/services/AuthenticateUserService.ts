@@ -1,6 +1,9 @@
+import {sign} from 'jsonwebtoken'
 import { compare } from 'bcryptjs';
 
-import IUsersRepository from '../interfaces/repositories/IUsersRepository';
+import authConfig from '../../../config/authConfig';
+
+import IUsersRepository from '../interfaces/repositories/IUsersRepository';0
 
 import User from '../entities/User';
 
@@ -21,7 +24,7 @@ class AuthenticateUserService {
     const user = await this.usersRepository.findByUserName(username);
 
     if (!user) throw new Error('Combinação de usuário e senha inválida.');
-
+    console.log(user);
     const passwordMatched = await compare(password,user.password);
 
     if (!passwordMatched)
