@@ -1,6 +1,6 @@
 interface ICreateOilDTO {
   name: string;
-  expiration: Date;
+  expirationInMonth: number;
 }
 
 export default ICreateOilDTO;
