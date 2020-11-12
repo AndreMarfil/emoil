@@ -1,6 +1,5 @@
 import { getRepository, Repository } from 'typeorm';
 
-
 import IOilsRepository from '../interfaces/repositories/IOilsRepository';
 
 import Oil from '../entities/Oil';
@@ -12,13 +11,19 @@ class OilsRepository implements IOilsRepository {
   constructor() {
     this.ormRepository = getRepository(Oil);
   }
-  findByName(name: string): Promise<Oil | undefined> {
-    throw new Error('Method not implemented.');
+
+  public async findByName(name: string): Promise<Oil | undefined> {
+    return this.ormRepository.findOne({ where: { name } });
   }
 
-
-    public async create({name,expiration}: ICreateOilDTO): Promise<Oil> {
-    const oil = this.ormRepository.create({ name,expiration });
+  public async create({
+    name,
+    expirationInMonth,
+  }: ICreateOilDTO): Promise<Oil> {
+    const oil = this.ormRepository.create({
+      name,
+      expiration: expirationInMonth,
+    });
 
     await this.save(oil);
 
@@ -30,4 +35,4 @@ class OilsRepository implements IOilsRepository {
   }
 }
 
-export default CustomersRepository;
+export default OilsRepository;

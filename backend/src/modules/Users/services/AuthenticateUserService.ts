@@ -1,10 +1,10 @@
-import {sign} from 'jsonwebtoken'
-import { injectable ,inject} from 'tsyringe';
+import { sign } from 'jsonwebtoken';
+import { injectable, inject } from 'tsyringe';
 import { compare } from 'bcryptjs';
 
 import authConfig from '../../../config/authConfig';
 
-import IUsersRepository from '../interfaces/repositories/IUsersRepository';0
+import IUsersRepository from '../interfaces/repositories/IUsersRepository';
 
 import User from '../entities/User';
 
@@ -22,17 +22,18 @@ interface IResponse {
 class AuthenticateUserService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository) {}
+    private usersRepository: IUsersRepository,
+  ) {}
 
   public async execute({ username, password }: IRequest): Promise<IResponse> {
     const user = await this.usersRepository.findByUserName(username);
 
     if (!user) throw new Error('Combinação de usuário e senha inválida.');
-    console.log(user);
-    const passwordMatched = await compare(password,user.password);
+
+    const passwordMatched = await compare(password, user.password);
 
     if (!passwordMatched)
-    throw new Error('Combinação de usuário e senha inválida.');
+      throw new Error('Combinação de usuário e senha inválida.');
 
     const { secret, expiresIn } = authConfig.jwt;
 

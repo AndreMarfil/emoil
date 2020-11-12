@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
+import ensureAuthenticated from '../../Users/middlewares/ensureAuthenticated';
+
 import CustomersController from '../controllers/CustomersController';
 
 const customersRoute = Router();
 const customersController = new CustomersController();
 
-customersRoute.post('/', customersController.create);
-
-customersRoute.get('/', () => console.log(1));
+customersRoute.post('/', ensureAuthenticated, customersController.create);
 
 export default customersRoute;

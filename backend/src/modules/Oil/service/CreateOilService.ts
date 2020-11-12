@@ -1,5 +1,4 @@
 import { injectable, inject } from 'tsyringe';
-import { addMonths } from 'date-fns';
 import * as Yup from 'yup';
 import IOilsRepository from '../interfaces/repositories/IOilsRepository';
 import Oil from '../entities/Oil';
@@ -18,9 +17,7 @@ class CreateOilService {
 
   public async execute({ name, expirationInMonth }: IRequest): Promise<Oil> {
     const schema = Yup.object().shape({
-      name: Yup.string().required(
-        'Aqui pode conter uma mensagem segundo o Leo',
-      ),
+      name: Yup.string().required('O óleo deve possuir um nome.'),
       expirationInMonth: Yup.number()
         .required()
         .moreThan(0, 'A expiração do oléo deve ser maior que zero'),
@@ -28,9 +25,10 @@ class CreateOilService {
 
     await schema.validate({ name, expirationInMonth }, { abortEarly: false });
 
-    const expiration = addMonths(new Date(), expirationInMonth);
-
-    const oil = await this.oilsRepository.create({ expiration, name });
+    const oil = await this.oilsRepository.create({
+      name,
+      expirationInMonth,
+    });
 
     return oil;
   }

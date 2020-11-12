@@ -18,10 +18,9 @@ export class CreateOils1600298186842 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'expiration',
+            name: 'expirationInMonth',
             type: 'integer',
           },
-
           {
             name: 'created_at',
             type: 'timestamp',

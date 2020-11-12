@@ -6,6 +6,9 @@ import CustomersRepository from '../../modules/Customers/repositories/CustomersR
 import IUsersRepository from '../../modules/Users/interfaces/repositories/IUsersRepository';
 import UsersRepository from '../../modules/Users/repositories/UsersRepository';
 
+import IOilsRepository from '../../modules/Oil/interfaces/repositories/IOilsRepository';
+import OilsRepository from '../../modules/Oil/repositories/OilsRepository';
+
 container.registerSingleton<ICustomersRepository>(
   'CustomersRepository',
   CustomersRepository,
@@ -14,4 +17,6 @@ container.registerSingleton<ICustomersRepository>(
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
-)
+);
+
+container.registerSingleton<IOilsRepository>('OilsRepository', OilsRepository);
