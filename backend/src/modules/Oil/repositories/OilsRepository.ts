@@ -22,7 +22,7 @@ class OilsRepository implements IOilsRepository {
   }: ICreateOilDTO): Promise<Oil> {
     const oil = this.ormRepository.create({
       name,
-      expiration: expirationInMonth,
+      expirationInMonth,
     });
 
     await this.save(oil);
