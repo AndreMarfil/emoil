@@ -12,6 +12,12 @@ class OilsRepository implements IOilsRepository {
     this.ormRepository = getRepository(Oil);
   }
 
+  public async findById(id: string): Promise<Oil | undefined> {
+    const oil = await this.ormRepository.findOne({ where: { id } });
+
+    return oil;
+  }
+
   public async findByName(name: string): Promise<Oil | undefined> {
     return this.ormRepository.findOne({ where: { name } });
   }

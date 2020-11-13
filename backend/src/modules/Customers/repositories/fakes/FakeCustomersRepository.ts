@@ -8,6 +8,12 @@ import Customer from '../../entities/Customer';
 class CreateCustomersRepository implements ICustomersRepository {
   private customers: Customer[] = [];
 
+  public async findById(id: string): Promise<Customer | undefined> {
+    const findCustomer = this.customers.find(customer => customer.id === id);
+
+    return findCustomer;
+  }
+
   public async findByEmail(email: string): Promise<Customer | undefined> {
     const findCustomer = this.customers.find(
       customer => customer.email === email,

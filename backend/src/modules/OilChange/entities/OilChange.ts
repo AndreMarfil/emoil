@@ -24,7 +24,7 @@ class OilChange {
   oil: Oil;
 
   @Column()
-  expiration: Date;
+  expiration_date: Date;
 
   @CreateDateColumn()
   created_at: Date;

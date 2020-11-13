@@ -5,6 +5,10 @@ import IOilsRepository from '../../interfaces/repositories/IOilsRepository';
 class FakeOilsRepository implements IOilsRepository {
   private oils: Oil[] = [];
 
+  public async findById(id: string): Promise<Oil | undefined> {
+    throw new Error('Method not implemented.');
+  }
+
   public async findByName(name: string): Promise<Oil | undefined> {
     throw new Error('Method not implemented.');
   }
@@ -17,3 +21,5 @@ class FakeOilsRepository implements IOilsRepository {
     throw new Error('Method not implemented.');
   }
 }
+
+export default FakeOilsRepository;
