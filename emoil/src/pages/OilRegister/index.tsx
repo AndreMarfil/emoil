@@ -10,6 +10,7 @@ const OilRegister: React.FC = () => {
   return (
     <div className="container" id="page-registeroil-form">
       <PageHeader
+        isMenu={false}
         title="Cadastre um óleo"
         description="Informe todos os campos para o cadastro do óleo"
       />

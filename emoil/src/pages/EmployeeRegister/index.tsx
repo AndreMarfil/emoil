@@ -9,6 +9,7 @@ const EmployeeRegister: React.FC = () => {
   return (
     <div className="container" id="page-registeremployee-form">
       <PageHeader
+        isMenu={false}
         title="Cadastre um funcionário"
         description="Informe todos os campos para o cadastro do funcionário"
       />

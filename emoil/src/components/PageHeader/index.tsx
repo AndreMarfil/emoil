@@ -8,15 +8,18 @@ import './styles.css';
 interface PageHeaderProps {
   title: string;
   description?: string;
+  isMenu: boolean;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = props => {
   return (
     <header className="page-header">
       <div className="top-bar-container">
-        <Link to="/">
-          <img src={backIcon} alt="Voltar" />
-        </Link>
+        {!props.isMenu && (
+          <Link to="/">
+            <img src={backIcon} alt="Voltar" />
+          </Link>
+        )}
       </div>
 
       <div className="header-content">

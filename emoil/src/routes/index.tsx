@@ -1,5 +1,8 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+
+import Route from './Route';
+
 import Main from '../pages/Main';
 import OilRegister from '../pages/OilRegister';
 import EmployeeRegister from '../pages/EmployeeRegister';
@@ -9,12 +12,12 @@ import Login from '../pages/Login';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/" exact component={Main} />
-    <Route path="/oil" component={OilRegister} />
-    <Route path="/employee" component={EmployeeRegister} />
-    <Route path="/customer" component={CustomerRegister} />
-    <Route path="/oilChange" component={OilChangeRegister} />
-    <Route path="/login" component={Login} />
+    <Route path="/dashboard" isPrivate exact component={Main} />
+    <Route path="/oil" isPrivate component={OilRegister} />
+    <Route path="/employee" isPrivate component={EmployeeRegister} />
+    <Route path="/customer" isPrivate component={CustomerRegister} />
+    <Route path="/oilChange" isPrivate component={OilChangeRegister} />
+    <Route path="/" exact component={Login} />
   </Switch>
 );
 

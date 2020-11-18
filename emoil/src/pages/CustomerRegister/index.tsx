@@ -9,6 +9,7 @@ const CustomerRegister: React.FC = () => {
   return (
     <div className="container" id="page-registercustomer-form">
       <PageHeader
+        isMenu={false}
         title="Cadastre um cliente"
         description="Informe todos os campos para o cadastro do cliente"
       />
