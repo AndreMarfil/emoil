@@ -54,8 +54,8 @@ const CustomerRegister: React.FC = () => {
       />
       <FormContainer handleButtonPress={handleButtonPress}>
         <fieldset>
-          <Input onChangeValue={setName} value={name} type="text" name="name" label="Nome" />
-          <Input onChangeValue={setEmail} value={email} type="email" name="email" label="Email" />
+          <Input onChange={e=>setName(e.target.value)} value={name} type="text" name="name" label="Nome" />
+          <Input onChange={e=>setEmail(e.target.value)} value={email} type="email" name="email" label="Email" />
         </fieldset>
       </FormContainer>
     </div>

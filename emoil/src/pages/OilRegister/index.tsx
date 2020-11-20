@@ -5,7 +5,6 @@ import './styles.css';
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import FormContainer from '../../components/FormContainer';
-import Textarea from '../../components/Textarea';
 import { useToast } from '../../hooks/toast';
 import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
@@ -43,7 +42,7 @@ const OilRegister: React.FC = () => {
         addToast({title:'Erro',description: errorYup[0]});
       }
     }
-  },[addToast,name,expirationInMonth,history])
+  },[addToast,name,expirationInMonth,history]);
 
   return (
     <div className="container" id="page-registeroil-form">
@@ -53,11 +52,11 @@ const OilRegister: React.FC = () => {
         description="Informe todos os campos para o cadastro do óleo"
       />
 
-      <FormContainer>
+      <FormContainer handleButtonPress={handleButtonPress}>
         <fieldset>
           <legend>Dados do óleo</legend>
-          <Input type="text" name="name" label="Nome do óleo" />
-          <Input type="number" name="expiration" label="Validade (Em meses)" />
+          <Input onChange={e=>setName(e.target.value)} type="text" name="name" label="Nome do óleo" />
+          <Input onChange={e=>setExpirationInMonth(e.target.value)} type="number" name="expiration" label="Validade (Em meses)" />
         </fieldset>
       </FormContainer>
     </div>

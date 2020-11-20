@@ -26,7 +26,7 @@ const SignUp: React.FC = () => {
       })
 
       const newUser = {
-        name,
+        username,
         password,
       }
 
@@ -43,7 +43,7 @@ const SignUp: React.FC = () => {
         addToast({title:'Erro',description: errorYup[0]});
       }
     }
-  },[addToast,name,password,history])
+  },[addToast,username,password,history])
 
   return (
     <div className="container" id="page-registeremployee-form">
@@ -52,11 +52,11 @@ const SignUp: React.FC = () => {
         title="Novo usuário"
         description="Informe todos os campos para o cadastro"
       />
-      <FormContainer>
+      <FormContainer handleButtonPress={handleButtonPress}>
         <fieldset>
           <legend>Dados do novo usuário</legend>
-          <Input onChangeValue={setUsername} value={username} type="text" name="setUsername" label="Nome de usuário" />
-          <Input onChangeValue={setPassword} value={password} type="password" name="password" label="Senha" />
+          <Input onChange={e=>setUsername(e.target.value)} value={username} type="text" name="username" label="Nome de usuário" />
+          <Input onChange={e=>setPassword(e.target.value)} value={password} type="password" name="password" label="Senha" />
         </fieldset>
       </FormContainer>
     </div>
