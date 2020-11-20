@@ -1,37 +1,49 @@
-import React,{useState,useCallback,useEffect} from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import * as Yup from 'yup';
 
 import './styles.css';
+import { useHistory } from 'react-router-dom';
 import PageHeader from '../../components/PageHeader';
 import FormContainer from '../../components/FormContainer';
 import Select from '../../components/Select';
 import { useToast } from '../../hooks/toast';
-import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 
-interface ISelectOptions{
-  id:string
-  name:string
+interface ISelectOptions {
+  id: string;
+  name: string;
 }
 
 const OilChangeRegister: React.FC = () => {
-  const {addToast} = useToast();
+  const { addToast } = useToast();
 
   const history = useHistory();
 
-  const [customers,setCustomers] = useState<ISelectOptions[]>([]);
-  const [oils,setOils] = useState<ISelectOptions[]>([]);
+  const [customers, setCustomers] = useState<ISelectOptions[]>([]);
+  const [oils, setOils] = useState<ISelectOptions[]>([]);
 
-  const [name,setName] = useState('');
-  const [expirationInMonth,setExpirationInMonth] = useState('');
+  const [name, setName] = useState('');
+  const [expirationInMonth, setExpirationInMonth] = useState('');
 
-  useEffect(()=>{
-    api.get('/customers').then(response=> setCustomers(response.data));
-    api.get('/oils').then(response=> setOils(response.data));
-  },[]);
+  useEffect(() => {
+    api
+      .get('/customers', {
+        headers: {
+          Authorization: `Bearear ${localStorage.getItem('@Emoil:token')}`,
+        },
+      })
+      .then(response => setCustomers(response.data));
+    api
+      .get('/oils', {
+        headers: {
+          Authorization: `Bearear ${localStorage.getItem('@Emoil:token')}`,
+        },
+      })
+      .then(response => setOils(response.data));
+  }, []);
 
-  const handleButtonPress = useCallback(async ()=>{
-    try{
+  const handleButtonPress = useCallback(async () => {
+    try {
       // const schema = Yup.object().shape({
       //   name:Yup.string().required('O nome do óleo é obrigatório'),
       //   expirationInMonth : Yup.number().required('A validade do óleo em meses é obrigatória').moreThan(0,'A validade deve ser maior que zero')
@@ -44,18 +56,27 @@ const OilChangeRegister: React.FC = () => {
 
       // await schema.validate(newOil);
 
-      await api.post('/change',);
+      await api.post('/change');
 
       history.push('/dashboard');
-    }catch(err){
+    } catch (err) {
       if (err instanceof Yup.ValidationError) {
-       const errorYup =  err.inner.map(error=>error.message);
+        const yupErrors = err.errors.map(error => error);
 
-       if(errorYup)
-        addToast({title:'Erro',description: errorYup[0]});
+        addToast({
+          title: 'Erro',
+          description: yupErrors.join('\r\n'),
+        });
+
+        return;
       }
+
+      addToast({
+        title: 'Erro na autenticação',
+        description: 'Ocorreu um erro ao cadastrar a troca de óleo',
+      });
     }
-  },[addToast,name,expirationInMonth,history]);
+  }, [addToast, history]);
 
   return (
     <div className="container" id="page-registeroilchange-form">
@@ -71,6 +92,12 @@ const OilChangeRegister: React.FC = () => {
             label="Cliente"
             options={[
               { value: '-1', label: '' },
+              ...customers.map(customer => {
+                return {
+                  value: customer.id,
+                  label: customer.name,
+                };
+              }),
             ]}
           />
           <Select

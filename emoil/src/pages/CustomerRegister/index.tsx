@@ -1,5 +1,7 @@
-import React, {useState,useCallback} from 'react';
+import React, { useState, useCallback } from 'react';
 import * as Yup from 'yup';
+
+import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
 import FormContainer from '../../components/FormContainer';
@@ -8,42 +10,55 @@ import Input from '../../components/Input';
 import './styles.css';
 import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
-import { useHistory } from 'react-router-dom';
+import Axios from 'axios';
 
 const CustomerRegister: React.FC = () => {
-  const {addToast} = useToast();
+  const { addToast } = useToast();
 
   const history = useHistory();
 
-  const [name,setName] = useState('');
-  const [email,setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
 
-  const handleButtonPress = useCallback(async ()=>{
-    try{
+  const handleButtonPress = useCallback(async () => {
+    try {
       const schema = Yup.object().shape({
-        name:Yup.string().required('O nome é obrigatório'),
-        email:Yup.string().required('O email é obrigatório').email('Informe um email válido'),
-      })
+        name: Yup.string().required('O nome é obrigatório.'),
+        email: Yup.string()
+          .required('O email é obrigatório.')
+          .email('Informe um email válido.'),
+      });
 
       const customer = {
         name,
         email,
-      }
+      };
 
-      await schema.validate(customer);
+      await schema.validate(customer, { abortEarly: false });
 
-      await api.post('/customers',customer);
+      await api.post('/customers', customer, {
+        headers: {
+          Authorization: `Bearear ${localStorage.getItem('@Emoil:token')}`,
+        },
+      });
 
       history.push('/dashboard');
-    }catch(err){
+    } catch (err) {
       if (err instanceof Yup.ValidationError) {
-       const errorYup =  err.inner.map(error=>error.message);
+        const yupErrors = err.errors.map(error => error);
 
-       if(errorYup)
-        addToast({title:'Erro',description: errorYup[0]});
+        addToast({
+          title: 'Erro',
+          description: yupErrors.join('\r\n'),
+        });
       }
+
+      // addToast({
+      //   title: 'Erro na autenticação',
+      //   description: 'Ocorreu um erro ao cadastrar o consumidor',
+      // });
     }
-  },[addToast,name,email,history])
+  }, [addToast, name, email, history]);
 
   return (
     <div className="container" id="page-registercustomer-form">
@@ -54,8 +69,20 @@ const CustomerRegister: React.FC = () => {
       />
       <FormContainer handleButtonPress={handleButtonPress}>
         <fieldset>
-          <Input onChange={e=>setName(e.target.value)} value={name} type="text" name="name" label="Nome" />
-          <Input onChange={e=>setEmail(e.target.value)} value={email} type="email" name="email" label="Email" />
+          <Input
+            onChange={e => setName(e.target.value)}
+            value={name}
+            type="text"
+            name="name"
+            label="Nome"
+          />
+          <Input
+            onChange={e => setEmail(e.target.value)}
+            value={email}
+            type="email"
+            name="email"
+            label="Email"
+          />
         </fieldset>
       </FormContainer>
     </div>

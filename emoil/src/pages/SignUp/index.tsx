@@ -1,4 +1,4 @@
-import React, {useState,useCallback} from 'react';
+import React, { useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 
@@ -11,39 +11,50 @@ import api from '../../services/api';
 import './styles.css';
 
 const SignUp: React.FC = () => {
-  const {addToast} = useToast();
+  const { addToast } = useToast();
 
   const history = useHistory();
 
-  const [username,setUsername] = useState('');
-  const [password,setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleButtonPress = useCallback(async ()=>{
-    try{
+  const handleButtonPress = useCallback(async () => {
+    try {
       const schema = Yup.object().shape({
-        username:Yup.string().required('O nome de usuário é obrigatório'),
-        password : Yup.string().required('A senha é obrigatória').min(8,'A senha deve possuir pelo menos oito digitos')
-      })
+        username: Yup.string().required('O nome de usuário é obrigatório'),
+        password: Yup.string()
+          .required('A senha é obrigatória')
+          .min(8, 'A senha deve possuir pelo menos oito digitos'),
+      });
 
       const newUser = {
         username,
         password,
-      }
+      };
 
       await schema.validate(newUser);
 
-      await api.post('/users',newUser);
+      await api.post('/users', newUser);
 
       history.push('/');
-    }catch(err){
+    } catch (err) {
       if (err instanceof Yup.ValidationError) {
-       const errorYup =  err.inner.map(error=>error.message);
+        const yupErrors = err.errors.map(error => error);
 
-       if(errorYup)
-        addToast({title:'Erro',description: errorYup[0]});
+        addToast({
+          title: 'Erro',
+          description: yupErrors.join('\r\n'),
+        });
+
+        return;
       }
+
+      addToast({
+        title: 'Erro na autenticação',
+        description: 'Ocorreu um erro cadastrar um novo usuário',
+      });
     }
-  },[addToast,username,password,history])
+  }, [addToast, username, password, history]);
 
   return (
     <div className="container" id="page-registeremployee-form">
@@ -55,8 +66,20 @@ const SignUp: React.FC = () => {
       <FormContainer handleButtonPress={handleButtonPress}>
         <fieldset>
           <legend>Dados do novo usuário</legend>
-          <Input onChange={e=>setUsername(e.target.value)} value={username} type="text" name="username" label="Nome de usuário" />
-          <Input onChange={e=>setPassword(e.target.value)} value={password} type="password" name="password" label="Senha" />
+          <Input
+            onChange={e => setUsername(e.target.value)}
+            value={username}
+            type="text"
+            name="username"
+            label="Nome de usuário"
+          />
+          <Input
+            onChange={e => setPassword(e.target.value)}
+            value={password}
+            type="password"
+            name="password"
+            label="Senha"
+          />
         </fieldset>
       </FormContainer>
     </div>

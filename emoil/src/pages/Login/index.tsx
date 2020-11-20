@@ -1,5 +1,7 @@
 import React, { useCallback, useState } from 'react';
 
+import * as Yup from 'yup';
+
 import './styles.css';
 
 import { useHistory } from 'react-router-dom';
@@ -18,10 +20,33 @@ const Login: React.FC = () => {
 
   const handleSubmit = useCallback(async () => {
     try {
+      const schema = Yup.object().shape({
+        username: Yup.string().required('O nome de usuário é obrigatório'),
+        password: Yup.string().required('A senha é obrigatória'),
+      });
+
+      const user = {
+        username,
+        password,
+      };
+
+      await schema.validate(user);
+
       await signIn({ username, password });
 
       history.push('/dashboard');
-    } catch {
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const yupErrors = err.errors.map(error => error);
+
+        addToast({
+          title: 'Erro',
+          description: yupErrors.join('\r\n'),
+        });
+
+        return;
+      }
+
       addToast({
         title: 'Erro na autenticação',
         description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
