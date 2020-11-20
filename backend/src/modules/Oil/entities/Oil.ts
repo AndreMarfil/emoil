@@ -6,6 +6,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { Exclude } from 'class-transformer';
+
 @Entity('oils')
 class Oil {
   @PrimaryGeneratedColumn('uuid')
@@ -15,12 +17,15 @@ class Oil {
   name: string;
 
   @Column()
+  @Exclude()
   expirationInMonth: number;
 
   @CreateDateColumn()
+  @Exclude()
   created_at: Date;
 
   @UpdateDateColumn()
+  @Exclude()
   updated_at: Date;
 }
 
