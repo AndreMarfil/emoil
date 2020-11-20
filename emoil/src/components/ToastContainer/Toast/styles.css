@@ -8,9 +8,8 @@
 
   display: flex;
 
-  background: #ebf8ff;
-  color: #3172b7;
-
+  background: #fddede;
+  color: #c53030;
 }
 
 #id-container-toast-messsage div + div{

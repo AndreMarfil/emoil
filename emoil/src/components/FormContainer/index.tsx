@@ -4,10 +4,14 @@ import WarningIcon from '../../assets/warning.png';
 
 import './styles.css';
 
-const FormContainer: React.FC = ({ children }) => {
+interface IFormContainerProps{
+  handleButtonPress():void;
+}
+
+const FormContainer: React.FC<IFormContainerProps> = props => {
   return (
     <main className="main-container">
-      {children}
+      {props.children}
       <footer>
         <p>
           <img src={WarningIcon} width="35" alt="Aviso Importante" />
@@ -15,7 +19,7 @@ const FormContainer: React.FC = ({ children }) => {
           <br />
           Preencha todos os dados
         </p>
-        <button type="button">Salvar cadastro</button>
+        <button onClick={props.handleButtonPress} type="button">Salvar cadastro</button>
       </footer>
     </main>
   );

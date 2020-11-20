@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import {
   FiAlertCircle,
-  FiCheckCircle,
-  FiInfo,
   FiXCircle,
 } from 'react-icons/fi';
 
@@ -12,14 +10,10 @@ import './styles.css';
 
 interface ToastProps {
   message: ToastMessage;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  // style: object;
 }
 
 const icons = {
-  info: <FiInfo size={24} />,
   error: <FiAlertCircle size={24} />,
-  success: <FiCheckCircle size={24} />,
 };
 
 const Toast: React.FC<ToastProps> = ({ message }) => {
@@ -37,7 +31,7 @@ const Toast: React.FC<ToastProps> = ({ message }) => {
 
   return (
     <div id="id-container-toast-messsage" className="toast-container-message">
-      {icons[message.type || 'info']}
+      {icons['error']}
 
       <div>
         <strong>{message.title}</strong>

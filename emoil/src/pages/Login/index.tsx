@@ -23,7 +23,6 @@ const Login: React.FC = () => {
       history.push('/dashboard');
     } catch {
       addToast({
-        type: 'error',
         title: 'Erro na autenticação',
         description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
       });

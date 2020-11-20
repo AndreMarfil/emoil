@@ -15,14 +15,14 @@ const OilRegister: React.FC = () => {
         description="Informe todos os campos para o cadastro do óleo"
       />
 
-      <FormContainer>
+      {/* <FormContainer>
         <fieldset>
           <legend>Dados do óleo</legend>
           <Input type="text" name="name" label="Nome do óleo" />
           <Input type="number" name="expiration" label="Validade (Em meses)" />
           <Textarea name="info" label="Informações adicionais" />
         </fieldset>
-      </FormContainer>
+      </FormContainer> */}
     </div>
   );
 };

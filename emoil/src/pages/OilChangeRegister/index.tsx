@@ -14,7 +14,7 @@ const OilChangeRegister: React.FC = () => {
         title="Cadastre a troca do óleo"
         description="Informe todos os campos para o cadastro da troca do óleo"
       />
-      <FormContainer>
+      {/* <FormContainer>
         <fieldset>
           <Select
             name="customer"
@@ -34,7 +34,7 @@ const OilChangeRegister: React.FC = () => {
           />
           <Input type="date" name="date" label="Data da troca" />
         </fieldset>
-      </FormContainer>
+      </FormContainer> */}
     </div>
   );
 };
