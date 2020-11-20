@@ -55,8 +55,8 @@ const SignUp: React.FC = () => {
       <FormContainer>
         <fieldset>
           <legend>Dados do novo usuário</legend>
-          <Input type="text" name="name" label="Nome de usuário" />
-          <Input type="password" name="password" label="Senha" />
+          <Input onChangeValue={setUsername} value={username} type="text" name="setUsername" label="Nome de usuário" />
+          <Input onChangeValue={setPassword} value={password} type="password" name="password" label="Senha" />
         </fieldset>
       </FormContainer>
     </div>
