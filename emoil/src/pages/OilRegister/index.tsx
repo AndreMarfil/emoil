@@ -20,22 +20,26 @@ const OilRegister: React.FC = () => {
   const handleButtonPress = useCallback(async () => {
     try {
       const schema = Yup.object().shape({
-        name: Yup.string().required('O nome do óleo é obrigatório'),
-        expirationInMonth: Yup.number()
-          .required('A validade do óleo em meses é obrigatória')
-          .moreThan(0, 'A validade deve ser maior que zero'),
+        name: Yup.string().required('O nome do óleo é obrigatório.'),
+        expirationInMonth: Yup.number().moreThan(
+          0,
+          'A validade deve ser maior que zero.',
+        ),
       });
 
       const newOil = {
         name,
-        expirationInMonth,
+        expirationInMonth: +expirationInMonth,
       };
 
       await schema.validate(newOil);
 
-      await api.post('/oils', newOil);
-
-      history.push('/dashboard');
+      api
+        .post('/oils', newOil)
+        .then(() => history.push('/dashboard'))
+        .catch(err =>
+          addToast({ title: 'Erro', description: err.response.data.message }),
+        );
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const yupErrors = err.errors.map(error => error);

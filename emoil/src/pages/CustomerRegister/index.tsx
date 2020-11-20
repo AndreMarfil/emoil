@@ -7,10 +7,10 @@ import PageHeader from '../../components/PageHeader';
 import FormContainer from '../../components/FormContainer';
 import Input from '../../components/Input';
 
-import './styles.css';
 import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
-import Axios from 'axios';
+
+import './styles.css';
 
 const CustomerRegister: React.FC = () => {
   const { addToast } = useToast();
@@ -36,13 +36,12 @@ const CustomerRegister: React.FC = () => {
 
       await schema.validate(customer, { abortEarly: false });
 
-      await api.post('/customers', customer, {
-        headers: {
-          Authorization: `Bearear ${localStorage.getItem('@Emoil:token')}`,
-        },
-      });
-
-      history.push('/dashboard');
+      api
+        .post('/customers', customer)
+        .then(() => history.push('/dashboard'))
+        .catch(err =>
+          addToast({ title: 'Erro', description: err.response.data.message }),
+        );
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const yupErrors = err.errors.map(error => error);
@@ -53,10 +52,10 @@ const CustomerRegister: React.FC = () => {
         });
       }
 
-      // addToast({
-      //   title: 'Erro na autenticação',
-      //   description: 'Ocorreu um erro ao cadastrar o consumidor',
-      // });
+      addToast({
+        title: 'Erro na autenticação',
+        description: 'Ocorreu um erro ao cadastrar o consumidor',
+      });
     }
   }, [addToast, name, email, history]);
 

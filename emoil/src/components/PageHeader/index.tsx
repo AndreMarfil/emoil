@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { AiOutlinePoweroff } from 'react-icons/ai';
 import backIcon from '../../assets/back.svg';
+import { useAuth } from '../../hooks/auth';
 
 import './styles.css';
 
@@ -12,6 +14,8 @@ interface PageHeaderProps {
 }
 
 const PageHeader: React.FC<PageHeaderProps> = props => {
+  const { signOut } = useAuth();
+
   return (
     <header className="page-header">
       <div className="top-bar-container">
@@ -20,6 +24,8 @@ const PageHeader: React.FC<PageHeaderProps> = props => {
             <img src={backIcon} alt="Voltar" />
           </Link>
         )}
+
+        <AiOutlinePoweroff size={24} onClick={signOut} />
       </div>
 
       <div className="header-content">

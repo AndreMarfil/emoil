@@ -1,14 +1,16 @@
 import React from 'react';
 
 import { FaOilCan, FaCarAlt, FaRegIdCard } from 'react-icons/fa';
-import { IoIosPerson } from 'react-icons/io';
 import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
+import { useAuth } from '../../hooks/auth';
 
 import './styles.css';
 
 const Main: React.FC = () => {
+  const { user } = useAuth();
+
   const history = useHistory();
 
   return (
