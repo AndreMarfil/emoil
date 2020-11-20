@@ -14,6 +14,10 @@ class CreateCustomersRepository implements ICustomersRepository {
     return findCustomer;
   }
 
+  public async findAll(): Promise<Customer[]> {
+    return this.customers;
+  }
+
   public async findByEmail(email: string): Promise<Customer | undefined> {
     const findCustomer = this.customers.find(
       customer => customer.email === email,

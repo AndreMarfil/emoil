@@ -8,5 +8,6 @@ const customersRoute = Router();
 const customersController = new CustomersController();
 
 customersRoute.post('/', ensureAuthenticated, customersController.create);
+customersRoute.get('/', ensureAuthenticated, customersController.index);
 
 export default customersRoute;

@@ -8,5 +8,6 @@ const oilsRouter = Router();
 const oilController = new OilController();
 
 oilsRouter.post('/', ensureAuthenticate, oilController.create);
+oilsRouter.get('/', ensureAuthenticate, oilController.index);
 
 export default oilsRouter;

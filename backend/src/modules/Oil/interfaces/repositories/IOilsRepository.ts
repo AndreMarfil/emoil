@@ -6,6 +6,7 @@ interface IOilsRepository {
   findByName(name: string): Promise<Oil | undefined>;
   create(data: ICreateOilDTO): Promise<Oil>;
   save(oil: Oil): Promise<Oil>;
+  findAll(): Promise<Oil[]>;
 }
 
 export default IOilsRepository;
