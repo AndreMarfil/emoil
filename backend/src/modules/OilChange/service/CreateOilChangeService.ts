@@ -34,26 +34,20 @@ class CreateOilChangeService {
 
     if (!oil) throw new AppError('Óleo não existe');
 
-    const date = new Date().toString();
+    const date = new Date();
 
-    console.log(date);
+    // const timeZone = 'America/Sao_Paulo';
+    // const zonedDate = parseFromTimeZone(date, { timeZone });
 
-    const timeZone = 'America/Sao_Paulo';
-    const zonedDate = parseFromTimeZone(date, { timeZone });
+    const expiration_date = addMonths(date, oil.expirationInMonth);
 
-    console.log(zonedDate);
+    const oilChange = await this.oilChangeRepository.create({
+      customer,
+      oil,
+      expiration_date,
+    });
 
-    const expiration_date = addMonths(zonedDate, oil.expirationInMonth);
-
-    // const oilChange = await this.oilChangeRepository.create({
-    //   customer,
-    //   oil,
-    //   expiration_date,
-    // });
-
-    // return oilChange;
-
-    return new OilChange();
+    return oilChange;
   }
 }
 

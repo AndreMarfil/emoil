@@ -20,10 +20,14 @@ class CreateOilService {
       name: Yup.string().required('O óleo deve possuir um nome.'),
       expirationInMonth: Yup.number()
         .required()
-        .moreThan(0, 'A expiração do oléo deve ser maior que zero'),
+        .moreThan(0, 'A expiração do oléo deve ser maior que zero.'),
     });
 
     await schema.validate({ name, expirationInMonth }, { abortEarly: false });
+
+    const oilNameAlreadyInUse = await this.oilsRepository.findByName(name);
+
+    if (oilNameAlreadyInUse) throw new Error('Óleo já cadastrado.');
 
     const oil = await this.oilsRepository.create({
       name,

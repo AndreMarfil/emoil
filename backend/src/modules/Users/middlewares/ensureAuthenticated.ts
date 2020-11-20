@@ -19,7 +19,7 @@ export default function ensureAuthenticated(
   const authHeader = request.headers.authorization;
 
   if (!authHeader)
-    throw new AppError('Token de autenticação é necessário', 401);
+    throw new AppError('Token de autenticação é necessário.', 401);
 
   const [, token] = authHeader.split(' ');
 
