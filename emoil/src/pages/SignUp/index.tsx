@@ -34,9 +34,12 @@ const SignUp: React.FC = () => {
 
       await schema.validate(newUser);
 
-      await api.post('/users', newUser);
-
-      history.push('/');
+      await api
+        .post('/users', newUser)
+        .then(() => history.push('/'))
+        .catch(error =>
+          addToast({ title: 'Erro', description: error.response.data.message }),
+        );
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const yupErrors = err.errors.map(error => error);
@@ -59,6 +62,7 @@ const SignUp: React.FC = () => {
   return (
     <div className="container" id="page-registeremployee-form">
       <PageHeader
+        signUp
         isMenu={false}
         title="Novo usuário"
         description="Informe todos os campos para o cadastro"

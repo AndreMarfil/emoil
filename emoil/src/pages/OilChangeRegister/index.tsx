@@ -8,7 +8,6 @@ import FormContainer from '../../components/FormContainer';
 import Select from '../../components/Select';
 import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
-import { useAuth } from '../../hooks/auth';
 
 interface ISelectOptions {
   id: string;
@@ -16,8 +15,6 @@ interface ISelectOptions {
 }
 
 const OilChangeRegister: React.FC = () => {
-  const { user } = useAuth();
-
   const { addToast } = useToast();
 
   const history = useHistory();
@@ -27,9 +24,6 @@ const OilChangeRegister: React.FC = () => {
 
   const [selectedCustomer, setSelectedCustomer] = useState('');
   const [selectedOil, setSelectedOil] = useState('');
-
-  const [name, setName] = useState('');
-  const [expirationInMonth, setExpirationInMonth] = useState('');
 
   useEffect(() => {
     api.get('/customers').then(response => setCustomers(response.data));

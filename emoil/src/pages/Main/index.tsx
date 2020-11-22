@@ -18,7 +18,7 @@ const Main: React.FC = () => {
       <PageHeader
         isMenu
         title="Menu de opções"
-        description="Escolha uma opção"
+        description={`Escolha uma opção ${user}`}
       />
       <div className="container">
         <div className="row">

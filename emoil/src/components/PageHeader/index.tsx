@@ -11,6 +11,7 @@ interface PageHeaderProps {
   title: string;
   description?: string;
   isMenu: boolean;
+  signUp?: boolean;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = props => {
@@ -24,8 +25,7 @@ const PageHeader: React.FC<PageHeaderProps> = props => {
             <img src={backIcon} alt="Voltar" />
           </Link>
         )}
-
-        <AiOutlinePoweroff size={24} onClick={signOut} />
+        {!props.signUp && <AiOutlinePoweroff size={24} onClick={signOut} />}
       </div>
 
       <div className="header-content">

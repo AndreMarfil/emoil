@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 import './styles.css';
 
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Input from '../../components/Input';
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
@@ -74,6 +74,9 @@ const Login: React.FC = () => {
         <button onClick={handleSubmit} type="button">
           Logar
         </button>
+        <div className="footer">
+          <Link to="/signup">Criar novo usuário</Link>
+        </div>
       </div>
     </div>
   );

@@ -3,8 +3,7 @@ import api from '../services/api';
 
 interface AuthState {
   token: string;
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  user: object;
+  user: string;
 }
 
 interface SignInCredentials {
@@ -13,8 +12,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  user: object;
+  user: string;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
 }
