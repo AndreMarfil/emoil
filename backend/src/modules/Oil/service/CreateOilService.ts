@@ -29,10 +29,7 @@ class CreateOilService {
 
     if (oilNameAlreadyInUse) throw new Error('Óleo já cadastrado.');
 
-    const oil = await this.oilsRepository.create({
-      name,
-      expirationInMonth,
-    });
+    const oil = await this.oilsRepository.create({ name, expirationInMonth });
 
     return oil;
   }
