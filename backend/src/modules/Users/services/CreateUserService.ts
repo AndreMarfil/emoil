@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import * as Yup from 'yup';
 import { hash } from 'bcryptjs';
 
 import IUsersRepository from '../interfaces/repositories/IUsersRepository';
@@ -18,6 +19,13 @@ class CreateUserService {
   ) {}
 
   public async execute({ username, password }: IRequest): Promise<User> {
+    const schema = Yup.object().shape({
+      name: Yup.string().required('O campo deve possuir um nome de usuário.'),
+      password: Yup.string().required('O campo deve possuir uma senha'),
+    });
+
+    await schema.validate({ username, password }, { abortEarly: false });
+
     const userAlreadyExists = await this.usersRepository.findByUserName(
       username,
     );
