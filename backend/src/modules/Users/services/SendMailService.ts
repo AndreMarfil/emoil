@@ -27,7 +27,7 @@ class SendMailService {
     });
 
     if (todayExpirationOilChange.length <= 0) {
-      console.log('Não há email para serem enviados.');
+      console.log('Não há email para ser enviado.');
       return;
     }
 
@@ -35,7 +35,7 @@ class SendMailService {
       const emailToBeSent = {
         to: oilChange.customer.email,
         subject: 'Troca de óleo',
-        text: `Olá ${oilChange.customer.name}, vejo que seu óleo ${oilChange.oil.name} está com a validade quase vencida. Vamos voltar ao posto ? `,
+        text: `Olá ${oilChange.customer.name}, somos a emoil e estamos passando para avisar que seu produto ${oilChange.oil.name} está prestes a vencer. Que tal dar uma passadinha nas redes credenciadas? `,
       };
       console.log(`Enviando para ${oilChange.customer.email}`);
       await sender.sendMail(emailToBeSent);
