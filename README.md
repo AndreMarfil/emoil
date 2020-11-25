@@ -10,7 +10,7 @@
 
 O projeto consiste em uma aplicação web feita para postos de gasolina, onde nela é possível cadastrar a troca de óleo que os clientes efetuaram em seus carros.
 Para a realização da troca de óleo é necessário saber quem é o cliente que está trocando o óleo e logo após o cadastro da troca de óleo, esta informação fica guardada para que seja usada futuramente.
-Cinco dias antes do "vencimento" do óleo um e-mail será enviado automaticamente para o cliente, com uma mensagem de aviso que a validade do óleo está perto de vencer seguido por um convite para que retorne ao posto e faça a troca do óleo. Para atrair o cliente ao estabelecimento será oferecido um desconto especial.
+No dia do "vencimento" do óleo um e-mail será enviado automaticamente para o cliente, com uma mensagem de aviso que a validade do óleo está perto de vencer seguido por um convite para que retorne ao posto e faça a troca do óleo. Para atrair o cliente ao estabelecimento será oferecido um desconto especial.
 Importante ressaltar que a ideia é baseada no conceito de Customer Relationship Management que é uma série de funcões que podem ser automatizadas por um sistema.
 
 ---
@@ -20,7 +20,9 @@ Importante ressaltar que a ideia é baseada no conceito de Customer Relationship
 O projeto foi desenvolvido utilizando as seguintes tecnologias
 
 - [React](https://pt-br.reactjs.org/)
-- [Axios](https://github.com/axios/axios)
+- [Node](https://nodejs.org/en/)
+- [Typescript](https://www.typescriptlang.org/)
+- [TypeORM](https://typeorm.io/#/)
 
 ---
 
@@ -36,11 +38,29 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias
 
     # Instalar as dependências
     $ yarn install
-
-    # Iniciar o projeto
-    $ yarn start
 ```
+
+## 🐱‍🏍 Rodando o Projeto (Backend)
+
+É necessário modificar o arquivo "ormconfig.json", utilizando as credencias do ambiente de desenvolvimento.
+```
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "docker",
+    "database": "emoil",
+
+```
+
+Após isso é necessário criar o banco de dados com o nome dado no arquivo. Neste exemplo foi criado o banco com o nome "emoil".
+E então rodar o comando ``` yarn dev:server``` para que seja inicializado o servidor.
+
+
+## 🐱‍🏍 Rodando o Projeto (Frontend)
+
+Necessário somente rodar o comando ``` yarn start ``` e está pronto para o uso. 
 
 ---
 
-Desenvolvido Andre Marfil Marins e Leonardo Gabriel Sanches
+Desenvolvido por Andre Marfil Marins e Leonardo Gabriel Sanches.✔
