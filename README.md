@@ -3,8 +3,8 @@
 - [Sobre](#-sobre)
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Como baixar o projeto](#-como-baixar-o-projeto)
-- [Rodando o projeto Backend] (#-rodando-o-projeto-backend)
-- [Rodando o projeto Frontend] (#-rodando-o-projeto-frontend)
+- [Rodando o projeto Backend](#-rodando-o-projeto-backend)
+- [Rodando o projeto Frontend](#-rodando-o-projeto-frontend)
 
 ## Emoil
 
