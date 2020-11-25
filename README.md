@@ -3,6 +3,8 @@
 - [Sobre](#-sobre)
 - [Tecnologias Utilizadas](#-tecnologias-utilizadas)
 - [Como baixar o projeto](#-como-baixar-o-projeto)
+- [Rodando o projeto Backend] (#-rodando-o-projeto-backend)
+- [Rodando o projeto Frontend] (#-rodando-o-projeto-frontend)
 
 ## Emoil
 
@@ -40,7 +42,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias
     $ yarn install
 ```
 
-## 🐱‍🏍 Rodando o Projeto (Backend)
+## 🐱‍🏍 Rodando o Projeto Backend
 
 É necessário modificar o arquivo "ormconfig.json", utilizando as credencias do ambiente de desenvolvimento.
 ```
@@ -57,7 +59,7 @@ Após isso é necessário criar o banco de dados com o nome dado no arquivo. Nes
 E então rodar o comando ``` yarn dev:server``` para que seja inicializado o servidor.
 
 
-## 🐱‍🏍 Rodando o Projeto (Frontend)
+## 🐱‍🏍 Rodando o Projeto Frontend
 
 Necessário somente rodar o comando ``` yarn start ``` e está pronto para o uso. 
 
