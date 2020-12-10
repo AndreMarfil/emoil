@@ -20,8 +20,10 @@ class CreateUserService {
 
   public async execute({ username, password }: IRequest): Promise<User> {
     const schema = Yup.object().shape({
-      name: Yup.string().required('O campo deve possuir um nome de usuário.'),
-      password: Yup.string().required('O campo deve possuir uma senha'),
+      username: Yup.string().required(
+        'O campo deve possuir um nome de usuário.',
+      ),
+      password: Yup.string().required('O campo deve possuir uma senha.'),
     });
 
     await schema.validate({ username, password }, { abortEarly: false });
