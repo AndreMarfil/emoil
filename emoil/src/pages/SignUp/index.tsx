@@ -23,8 +23,8 @@ const SignUp: React.FC = () => {
       const schema = Yup.object().shape({
         username: Yup.string().required('O nome de usuário é obrigatório'),
         password: Yup.string()
-          .required('A senha é obrigatória')
-          .min(8, 'A senha deve possuir pelo menos oito digitos'),
+          .required('A senha é obrigatória.')
+          .min(8, 'A senha deve possuir pelo menos oito digitos.'),
       });
 
       const newUser = {

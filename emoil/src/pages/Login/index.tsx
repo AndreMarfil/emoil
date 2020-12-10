@@ -21,8 +21,8 @@ const Login: React.FC = () => {
   const handleSubmit = useCallback(async () => {
     try {
       const schema = Yup.object().shape({
-        username: Yup.string().required('O nome de usuário é obrigatório'),
-        password: Yup.string().required('A senha é obrigatória'),
+        username: Yup.string().required('O nome de usuário é obrigatório.'),
+        password: Yup.string().required('A senha é obrigatória.'),
       });
 
       const user = {
